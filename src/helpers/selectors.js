@@ -23,7 +23,7 @@ export default function getAppointmentsForDay(state, day) {
 
 }
 
-export default function getInterview(state, interview) {
+export function getInterview(state, interview) {
 
 if (interview) {
   const newObj = {
