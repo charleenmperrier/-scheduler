@@ -5,6 +5,7 @@ import axios from 'axios';
 import "components/Application.scss";
 import DayList from "components/DayList.js"
 import Appointment from "components/Appointment"
+import getAppointmentsForDay from "helpers/selectors"
 
 // const appointments = [
 //   {
@@ -51,17 +52,21 @@ export default function Application(props) {
     appointments: {}
   });
 
-  const dailyAppointments = [];
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
   
   const setDay = day => setState({ ...state, day });
-  const setDays = days => setState(prev => ({ ...prev, days }));
+  // const setDays = days => setState(prev => ({ ...prev, days }));
 
 
   //api call for days
   useEffect(() => {
-    const daysUrl = `/api/days`
-    axios.get(daysUrl).then((response) => {
-      setDays(response.data);
+
+    Promise.all ([
+      axios.get(`/api/days`),
+      axios.get(`/api/appointments`)
+    ]).then((all) => {
+      // console.log(all)
+      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data }));
     });
   }, [])
 
@@ -70,7 +75,7 @@ export default function Application(props) {
   })
 
 
-  
+
   return (
     <main className="layout">
       <section className="sidebar">

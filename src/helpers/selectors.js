@@ -2,7 +2,7 @@
 
 
 
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
   
   
   // filter through the days array, get obj that matches day and take [0] of the days array
