@@ -21,11 +21,18 @@ export default function Application(props) {
   //using helper function to return array of appointment id's
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   // looping/mapping through the array
-  const appointmentList = dailyAppointments.map((appointment) => {
-    return <Appointment key={appointment.id} {...appointment}/>
-  })
+  const scheduleList = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    return (
+      <Appointment 
+        key={appointment.id} 
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+      />
+    );
+  });
   
- 
 
   //calling data from api's
   useEffect(() => {
@@ -41,7 +48,7 @@ export default function Application(props) {
   }, [])
 
   
-
+  console.log('inter: ' ,state.interviewers)
 
 
   return (
@@ -67,7 +74,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {appointmentList}
+        {scheduleList}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
