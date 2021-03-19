@@ -35,3 +35,18 @@ if (interview) {
 return null;
   
 }
+
+export function getInterviewersForDay (state, day) {
+
+  const filteredDays = state.days.filter(user => (user.name === day) )[0];
+
+  if (filteredDays === undefined || state.days.length === 0) {
+    return [];
+  }
+
+  const dayInterviewer = filteredDays.interviewers;
+
+  const interviewObj = dayInterviewer.map((id) => state.interviewers[id]);
+
+  return interviewObj;
+}
