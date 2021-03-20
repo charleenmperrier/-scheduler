@@ -34,8 +34,8 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    return axios.put(`/api/appointments/${id}`, {interview}).then((response) => {
-      const newState = response.body
+    return axios.put(`/api/appointments/${id}`, {interview}).then(() => {
+      
       setState ({...state, appointments})
     });
   }
@@ -59,7 +59,8 @@ export default function Application(props) {
   // looping/mapping through the array
   const scheduleList = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    
+    console.log(interview)
+    // console.log(interviewers)
     const interviewers = getInterviewersForDay(state, state.day);
     
     return (
