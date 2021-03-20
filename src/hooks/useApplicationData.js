@@ -14,8 +14,6 @@ export default function useApplicationData () {
   // set the current day
   const setDay = day => setState({ ...state, day });
 
-
-
   // HTTP request and updates the local state
   function bookInterview(id, interview) {
  
