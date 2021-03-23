@@ -27,7 +27,7 @@ export default function useApplicationData () {
     };
 
     return axios.put(`/api/appointments/${id}`, {interview}).then(() => {
-      setState ({...state, appointments})
+      setState ({...state, appointments, days: updatedSpotsArr(state.days, appointments)})
     });
   }
 
@@ -36,9 +36,32 @@ export default function useApplicationData () {
       ...state.appointments[id],
       interview: null
     };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
     return axios.delete(`/api/appointments/${id}`).then(() => {
-      setState ({...state, appointment})
+      setState ({...state, appointment, days: updatedSpotsArr(state.days, appointments)})
     });
+  }
+
+  const availableSpots = function (day, appointments) {
+    let count = 0;
+    for (const id of day.appointments) {
+      const appointment = appointments[id];
+      if(!appointment.interview) {
+        count++
+      }
+    }
+    return count;
+  }
+
+  const updatedSpotsArr = (days, appointments) => {
+    const newArray = days.map((day) => ({
+      ...day,
+      spots: availableSpots(day, appointments)
+    }))
+    return newArray
   }
 
   useEffect(() => {
@@ -49,7 +72,7 @@ export default function useApplicationData () {
     ]).then((all) => {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
     });
-  })
+  }, [])
 
   return { bookInterview, cancelInterview, state, setDay }
 }
