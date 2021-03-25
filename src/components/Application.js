@@ -23,7 +23,6 @@ export default function Application(props) {
    // looping/mapping through the array
    const scheduleList = dailyAppointments.map((appointment) => {
      const interview = getInterview(state, appointment.interview);
-     
       const interviewers = getInterviewersForDay(state, state.day);
     
       return (

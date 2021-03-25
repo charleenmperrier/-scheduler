@@ -4,8 +4,7 @@ import axios from "axios";
 import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
 
 import Application from "components/Application";
-// import axios from "../../__mocks__/axios"
-// jest.setTimeout(20000);
+
 afterEach(cleanup);
 
 describe('Form', () => {

@@ -25,14 +25,14 @@ export default function getAppointmentsForDay(state, day) {
 
 export function getInterview(state, interview) {
 
-if (interview) {
-  const newObj = {
-    'student': interview.student,
-    'interviewer': state.interviewers[interview.interviewer]
-  };
-  return newObj;
-}
-return null;
+  if (interview) {
+    const newObj = {
+      'student': interview.student,
+      'interviewer': state.interviewers[interview.interviewer]
+    };
+    return newObj;
+  }
+  return null;
   
 }
 
