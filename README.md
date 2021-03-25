@@ -21,3 +21,8 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Screen Shots of Scheduler
+
+!['Home Page'](https://github.com/charleenmperrier/scheduler/blob/master/Docs/homePage.png?raw=true)
+!['Add, Edit and Delete Appointment Forms'](https://github.com/charleenmperrier/scheduler/blob/master/Docs/New-Edit-Delete__Appointments.png?raw=true)
